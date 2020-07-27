@@ -1,4 +1,3 @@
-<%@page import="com.esum.TestBankClient.Bank.model.TestVO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
@@ -13,13 +12,41 @@
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
-</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script>
-	function login_excute(){
-		var userId = document.getElementById("login_id").value
+	function login_execute(){
+		var userid = document.getElementById("login_id").value;
+		var userpwd = document.getElementById("login_pwd").value;
+		
+		if(userid.length < 1){
+			alert("아이디와 비밀번호를 정확하게 입력해주세요.");
+		}else if(userpwd < 1){
+			alert("비밀번호를 정확하게 입력해주세요");
+		}else if(userpwd.length > 10){//비밀번호는 최소 9자 까지만
+			alert("비밀번호를 정확하게 입력해주세요");
+		}else{
+			var jsonObj = {};
+			
+			jsonObj.loginid = document.getElementById("login_id").value;
+			jsonObj.loginpwd = document.getElementById("login_pwd").value;
+			
+			$.ajax({
+				url : "loginResult.do",
+				data: {"param" : JSON.stringify(jsonObj)},
+				contentType : "application/json",
+				cache: false,
+				success: function (data22){
+						window.location.href = "/main/main.do"
+				},
+				error : function(){
+					alert("로그인 처리 중 문제가 발생하였습니다.");
+				}
+			});
+		}
 		
 	}
 </script>
+</head>
 <body>
 	<h1>간단한 은행 프로그램 입니다.</h1>
 	<table border="0" align="center">

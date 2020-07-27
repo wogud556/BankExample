@@ -1,15 +1,19 @@
 package com.esum.TestBankClient.Bank.module;
 
 import com.esum.TestBankClient.Bank.model.BankBook;
-import com.google.gson.*;
+import com.esum.TestBankClient.Bank.model.BankUser;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 public class JsonHandler {
+	JsonParser parser;
+	JsonElement element;
 	
 	public BankBook parseBnkBook(String jsonData) {
 		BankBook bnkbook = new BankBook();
 		
-		JsonParser parser = new JsonParser();
-		JsonElement element = parser.parse(jsonData);
+		parser = new JsonParser();
+		element = parser.parse(jsonData);
 		
 		String book_account_num = element.getAsJsonObject().get("bnk_book_account_num").getAsString();
 		String book_tra_date = element.getAsJsonObject().get("bnk_book_tra_date").getAsString();
@@ -26,6 +30,21 @@ public class JsonHandler {
 		
 		return bnkbook;
 		
+	}
+	
+	public BankUser parseBankUser(String jsonData) {
+		BankUser bnkuser = new BankUser();
+		
+		parser = new JsonParser();
+		element = parser.parse(jsonData);
+		
+		String loginid = element.getAsJsonObject().get("loginid").toString();
+		String loginpwd = element.getAsJsonObject().get("loginpwd").toString();
+		
+		bnkuser.setBnk_user_id(loginid);
+		bnkuser.setBnk_user_pwd(loginpwd);
+		
+		return bnkuser;
 	}
 
 }
