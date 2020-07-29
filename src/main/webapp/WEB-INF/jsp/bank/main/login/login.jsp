@@ -2,15 +2,15 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%
     	
     %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script>
@@ -19,11 +19,11 @@
 		var userpwd = document.getElementById("login_pwd").value;
 		
 		if(userid.length < 1){
-			alert("¾ÆÀÌµğ¿Í ºñ¹Ğ¹øÈ£¸¦ Á¤È®ÇÏ°Ô ÀÔ·ÂÇØÁÖ¼¼¿ä.");
+			alert("ì•„ì´ë””ì™€ ë¹„ë°€ë²ˆí˜¸ë¥¼ ì •í™•í•˜ê²Œ ì…ë ¥í•´ì£¼ì„¸ìš”.");
 		}else if(userpwd < 1){
-			alert("ºñ¹Ğ¹øÈ£¸¦ Á¤È®ÇÏ°Ô ÀÔ·ÂÇØÁÖ¼¼¿ä");
-		}else if(userpwd.length > 10){//ºñ¹Ğ¹øÈ£´Â ÃÖ¼Ò 9ÀÚ ±îÁö¸¸
-			alert("ºñ¹Ğ¹øÈ£¸¦ Á¤È®ÇÏ°Ô ÀÔ·ÂÇØÁÖ¼¼¿ä");
+			alert("ë¹„ë°€ë²ˆí˜¸ë¥¼ ì •í™•í•˜ê²Œ ì…ë ¥í•´ì£¼ì„¸ìš”");
+		}else if(userpwd.length > 10){//ë¹„ë°€ë²ˆí˜¸ëŠ” ìµœì†Œ 9ì ê¹Œì§€ë§Œ
+			alert("ë¹„ë°€ë²ˆí˜¸ë¥¼ ì •í™•í•˜ê²Œ ì…ë ¥í•´ì£¼ì„¸ìš”");
 		}else{
 			var jsonObj = {};
 			
@@ -36,19 +36,31 @@
 				contentType : "application/json",
 				cache: false,
 				success: function (data22){
-						window.location.href = "/main/main.do"
+						alert(data22);
+						if(Boolean(data22.trim())){
+							alert("ë¡œê·¸ì¸ì— ì„±ê³µí•˜ì˜€ìŠµë‹ˆë‹¤.");	
+							window.location.href = "/main/main.do";
+						}else{
+							alert("ë¡œê·¸ì¸ì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.");
+						}
 				},
 				error : function(){
-					alert("·Î±×ÀÎ Ã³¸® Áß ¹®Á¦°¡ ¹ß»ıÇÏ¿´½À´Ï´Ù.");
+					alert("ë¡œê·¸ì¸ ì²˜ë¦¬ ì¤‘ ë¬¸ì œê°€ ë°œìƒí•˜ì˜€ìŠµë‹ˆë‹¤.");
 				}
 			});
 		}
 		
 	}
+	
+	function new_user_popup(){
+		var url = "/newUser.do";
+		var name = "ì‹ ê·œ ê°€ì… ì°½";
+		window.open(url, name, "width=800, height=1000, toolbar=no, status=no, scrollbar=yes, menubar=yes, resizable=yes, left=100, right=100");
+	}
 </script>
 </head>
 <body>
-	<h1>°£´ÜÇÑ ÀºÇà ÇÁ·Î±×·¥ ÀÔ´Ï´Ù.</h1>
+	<h1>ê°„ë‹¨í•œ ì€í–‰ í”„ë¡œê·¸ë¨ ì…ë‹ˆë‹¤.</h1>
 	<table border="0" align="center">
 		<form name="login" method="post">
 			<tr>

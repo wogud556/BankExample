@@ -1,6 +1,8 @@
 package com.esum.TestBankClient.Bank.controller;
 
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -8,9 +10,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.esum.TestBankClient.Bank.model.BankBook;
-import com.esum.TestBankClient.Bank.module.HttpCall;
-import com.esum.TestBankClient.Bank.module.JsonHandler;
 import com.esum.TestBankClient.Bank.service.LoginService;
 
 @Controller
@@ -29,15 +28,12 @@ public class BankController {
 		//로그인 데이터 날려서 맞는지 틀린지 확인할것
 		return "login/login";
 	}
-	
-	@RequestMapping("/newUser.do")
-	public String newUser() throws Exception{
-		//신규 유저 생성화면으로 이동
-		return "main/NewUser";
-	}
+
 	
 	@RequestMapping("/loginResult.do")
 	public void result(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception{
+		
+		PrintWriter out = null;
 		
 		String urlpath = url + "/login";
 		//서비스 생성
@@ -50,7 +46,7 @@ public class BankController {
 		String result = loginService.loginService(userinfo, urlpath);
 		
 		System.out.println(result);
-		
+		response.setHeader("return", result);
 //		HttpCall httpcall = new HttpCall(url + urlpath);
 //		String result = httpcall.HttpConnection();
 //		
@@ -64,6 +60,9 @@ public class BankController {
 //		System.out.println("출금 금액은 : " + bnkbook.getBnk_book_withdraw_price() + " 입니다. ");
 //		System.out.println("현재 잔액은 : " + bnkbook.getBnk_total_price() + " 입니다. ");
 		
+		out = response.getWriter();
+		
+		out.write(result);
 		
 	}
 	@RequestMapping("/main.do")
@@ -80,6 +79,11 @@ public class BankController {
 	@RequestMapping("/UserInsert.do")
 	public void UserInsert() throws Exception{
 		//신규 유저 생성로직
+	}
+	@RequestMapping("/newUser.do")
+	public String newUser() throws Exception{
+		
+		return "login/newUser";
 	}
 	
 	
