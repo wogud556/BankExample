@@ -8,7 +8,7 @@ public class httpcallTest {
 		String url = "http://localhost:8089/login";
 		String returndata = "";
 		HttpCall httpcall = new HttpCall(url);
-		returndata = httpcall.HttpConnection();
+		//returndata = httpcall.HttpConnection();
 		
 		System.out.println(returndata);
 	}

@@ -46,5 +46,20 @@ public class JsonHandler {
 		
 		return bnkuser;
 	}
+	
+	public BankUser parseNewBankUser(String jsonData) {
+		BankUser bnkuser = new BankUser();
+		
+		parser = new JsonParser();
+		element = parser.parse(jsonData);
+		
+		String loginid = element.getAsJsonObject().get("loginid").toString();
+		String loginpwd = element.getAsJsonObject().get("loginpwd").toString();
+		
+		bnkuser.setBnk_user_id(loginid);
+		bnkuser.setBnk_user_pwd(loginpwd);
+		
+		return bnkuser;
+	}
 
 }

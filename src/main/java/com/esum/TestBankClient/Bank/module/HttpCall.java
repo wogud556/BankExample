@@ -19,55 +19,12 @@ public class HttpCall{
 	URL url;
 	HttpURLConnection conn;
 	Gson gson;
-	
+
 	public HttpCall(String Targeturl) {
 		this.Targeturl = Targeturl;
 	}
 
-	public String HttpConnection() {
-
-		url = null;
-		conn = null;
-		String jsonData = "";
-		BufferedReader br = null;
-		StringBuffer sb = null;
-		String returnText = "";
-
-		try {
-			url = new URL(Targeturl);
-
-			conn = (HttpURLConnection) url.openConnection();
-			conn.setRequestProperty("Accept", "application/json");
-			conn.setRequestProperty("DBHandler", "Select");
-			conn.setRequestProperty("Find", "all");
-			conn.setRequestMethod("GET");
-			conn.connect();
-
-			br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-
-			sb = new StringBuffer();
-
-			while ((jsonData = br.readLine()) != null) {
-				sb.append(jsonData);
-			} 
-
-			returnText = sb.toString();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (br != null)
-					br.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-
-		return returnText;
-	}
-
-	public String logincall(HashMap<String, String> Userdata) {
+	public String call(HashMap<String, String> Userdata) {
 
 		url = null;
 		conn = null;
@@ -138,4 +95,6 @@ public class HttpCall{
 
 		return returnText;
 	}
+	
+	
 }
