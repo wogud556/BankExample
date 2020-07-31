@@ -61,16 +61,21 @@ public class BankController {
 	
 	@RequestMapping("/useridConfirm.do")
 	public void useridConfirm(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception{
-		String urlpath = url + "/finduserid";
+		String urlpath = url + "/findUserId";
 		PrintWriter out = null;
 		String userinfo = request.getParameter("param");
-		
-		
 		System.out.println(userinfo);
+		LoginService loginService = new LoginService();
+		
+		String result = loginService.findUserId(userinfo, urlpath);
+		
+		System.out.println(result);
+		
+		response.setHeader("return", result);
 		
 		out = response.getWriter();
 		
-		out.write(userinfo);
+		out.write(result);
 		
 	}
 	

@@ -15,87 +15,93 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script>
-	function user_insert(){
+	function user_insert() {
 		var userid = document.getElementById("login_id").value;
 		var userpwd = document.getElementById("login_pwd").value;
-		
-		if(userid.length < 1){
+
+		if (userid.length < 1) {
 			alert("아이디와 비밀번호를 정확하게 입력해주세요.");
-		}else if(userpwd < 1){
+		} else if (userpwd < 1) {
 			alert("비밀번호를 정확하게 입력해주세요");
-		}else if(userpwd.length > 10){//비밀번호는 최소 9자 까지만
+		} else if (userpwd.length > 10) {//비밀번호는 최소 9자 까지만
 			alert("비밀번호를 정확하게 입력해주세요");
-		}else{
+		} else {
 			var jsonObj = {};
-			
+
 			jsonObj.loginid = document.getElementById("login_id").value;
 			jsonObj.loginpwd = document.getElementById("login_pwd").value;
-			
+
 			$.ajax({
 				url : "loginResult.do",
-				data: {"param" : JSON.stringify(jsonObj)},
-				contentType : "application/json",
-				cache: false,
-				success: function (data22){
-					
-						if(data22.toString == "true"){
-							alert("로그인에 성공하였습니다.");	
-							window.location.href = "/main/main.do";
-						}else{
-							alert("로그인에 실패하였습니다.");
-						}
+				data : {
+					"param" : JSON.stringify(jsonObj)
 				},
-				error : function(){
+				contentType : "application/json",
+				cache : false,
+				success : function(data22) {
+
+					if (data22.toString == "true") {
+						alert("로그인에 성공하였습니다.");
+						window.location.href = "/main/main.do";
+					} else {
+						alert("로그인에 실패하였습니다.");
+					}
+				},
+				error : function() {
 					alert("로그인 처리 중 문제가 발생하였습니다.");
 				}
 			});
 		}
-		
+
 	}
-	
-	function user_dup_execute(){
+
+	function user_dup_execute() {
 		var userid = document.getElementById("user_id").value;
-		
-		if(userid == ""){
+
+		if (userid == "") {
 			alert("아이디가 입력되지 않았습니다.")
-		}else{
-			
+		} else {
+
 			var jsonobj = {}
 			jsonobj.userid = userid;
-			
+
 			$.ajax({
 				url : "useridConfirm.do",
-				data: {"param" : JSON.stringify(jsonobj)},
-				contentType : "application/json",
-				cache: false,
-				success: function (data22){
-					
-						
-							alert(data22 +"사용 가능한 아이디 입니다.");	
-							var data = document.getElementById("user_id").value;
-							data = data22;
-						
+				data : {
+					"param" : JSON.stringify(jsonobj)
 				},
-				error : function(){
+				contentType : "application/json",
+				success : function(data22) {
+					
+					
+					alert("1");
+					$("#check_button").attr("disabled", true);
+					$("#check_id").text("사용중인아이디입니다.");
+					$("#check_id").css("color","red");
+				},
+				error : function() {
 					alert("아이디 확인 중 오류가 발생하였습니다.");
 				}
 			});
 		}
-		
-		
-		}
+
+	}
+	$("#check_button").click(function(){
+		user_dup_execute();
+		event.preventDefault();
+	});
 </script>
 </head>
 <body>
 	<h1>이것은 팝업창 입니다.</h1>
 	<table border="0" align="left">
-		<form name="login" method="post">
+		<form id="check_id" name="login" method="post">
 			<tr>
 				<td>아이디</td>
 				<td><input type="text" id="user_id" name="user_id"
-					class="box01" size="19" maxlength="16"
-					onkeypress="if(self.event.keyCode==13) user_dup_execute();" /></td>
-				<td width="70"><button onclick="user_dup_execute();">중복확인</button></td>
+					class="box01" size="19" maxlength="16" /></td>
+				<td width="70"><button id="check_button"  onclick = "user_dup_execute()" type="button">중복확인</button></td>
+				<td><div id="check_id"></div></td>
 			</tr>
 			<tr>
 				<td>패스워드</td>

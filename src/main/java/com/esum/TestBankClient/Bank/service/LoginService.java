@@ -42,7 +42,8 @@ public class LoginService {
 	
 	public String findUserId(String jsondata, String url) {
 		JsonHandler jsonHandler = new JsonHandler();
-		BankUser bnkuser = jsonHandler.parseNewBankUser(jsondata);
+		System.out.println(jsondata);
+		BankUser bnkuser = jsonHandler.parseFindBankUser(jsondata);
 		HttpCall httpCall = new HttpCall(url);
 		HashMap<String, String> findUserId = new HashMap<String, String>();
 		findUserId.put("Bnk_user_id", bnkuser.getBnk_user_id());
