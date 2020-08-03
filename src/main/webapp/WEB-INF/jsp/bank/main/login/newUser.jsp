@@ -2,64 +2,33 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%
 	
 %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>½Å±Ô °¡ÀÔ Ã¢</title>
+<meta charset="UTF-8">
+<title>ì‹ ê·œ ê°€ì… ì°½</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script>
 	function user_insert() {
 		var userid = document.getElementById("login_id").value;
 		var userpwd = document.getElementById("login_pwd").value;
-
-		if (userid.length < 1) {
-			alert("¾ÆÀÌµğ¿Í ºñ¹Ğ¹øÈ£¸¦ Á¤È®ÇÏ°Ô ÀÔ·ÂÇØÁÖ¼¼¿ä.");
-		} else if (userpwd < 1) {
-			alert("ºñ¹Ğ¹øÈ£¸¦ Á¤È®ÇÏ°Ô ÀÔ·ÂÇØÁÖ¼¼¿ä");
-		} else if (userpwd.length > 10) {//ºñ¹Ğ¹øÈ£´Â ÃÖ¼Ò 9ÀÚ ±îÁö¸¸
-			alert("ºñ¹Ğ¹øÈ£¸¦ Á¤È®ÇÏ°Ô ÀÔ·ÂÇØÁÖ¼¼¿ä");
-		} else {
-			var jsonObj = {};
-
-			jsonObj.loginid = document.getElementById("login_id").value;
-			jsonObj.loginpwd = document.getElementById("login_pwd").value;
-
-			$.ajax({
-				url : "loginResult.do",
-				data : {
-					"param" : JSON.stringify(jsonObj)
-				},
-				contentType : "application/json",
-				cache : false,
-				success : function(data22) {
-
-					if (data22.toString == "true") {
-						alert("·Î±×ÀÎ¿¡ ¼º°øÇÏ¿´½À´Ï´Ù.");
-						window.location.href = "/main/main.do";
-					} else {
-						alert("·Î±×ÀÎ¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù.");
-					}
-				},
-				error : function() {
-					alert("·Î±×ÀÎ Ã³¸® Áß ¹®Á¦°¡ ¹ß»ıÇÏ¿´½À´Ï´Ù.");
-				}
-			});
-		}
-
+		var userpwdconfirm = document.getElementById("user_pwd_right").value;
+		var username = document.getElementById("user_name").value;
+		
+		alert("í‹ë¡í•œë‹¤");
 	}
 
 	function user_dup_execute() {
 		var userid = document.getElementById("user_id").value;
 
 		if (userid == "") {
-			alert("¾ÆÀÌµğ°¡ ÀÔ·ÂµÇÁö ¾Ê¾Ò½À´Ï´Ù.")
+			alert("ì•„ì´ë””ê°€ ì…ë ¥ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
 		} else {
 
 			var jsonobj = {}
@@ -72,39 +41,40 @@
 				},
 				contentType : "application/json",
 				success : function(data22) {
+					alert(data22.toString().trim());
+					if(data22.toString().trim() === "true"){
+						alert("ì‚¬ìš©ì¤‘ì¸ ì•„ì´ë”” ì…ë‹ˆë‹¤.");
+						//$("#check_id").text("ì‚¬ìš©ì¤‘ì¸ì•„ì´ë””ì…ë‹ˆë‹¤.");
+						//$("#check_id").css("color","red");
+					}else{
+						alert("ì‚¬ìš© ê°€ëŠ¥í•œ ì•„ì´ë”” ì…ë‹ˆë‹¤.");
+						//$("#check_id").text("ì‚¬ìš©ê°€ëŠ¥í•©ë‹ˆë‹¤.");
+						//$("#check_id").css("color","red");
+					}
 					
-					
-					alert("1");
-					$("#check_button").attr("disabled", true);
-					$("#check_id").text("»ç¿ëÁßÀÎ¾ÆÀÌµğÀÔ´Ï´Ù.");
-					$("#check_id").css("color","red");
 				},
 				error : function() {
-					alert("¾ÆÀÌµğ È®ÀÎ Áß ¿À·ù°¡ ¹ß»ıÇÏ¿´½À´Ï´Ù.");
+					alert("ì•„ì´ë”” í™•ì¸ ì¤‘ ì˜¤ë¥˜ê°€ ë°œìƒí•˜ì˜€ìŠµë‹ˆë‹¤.");
 				}
 			});
 		}
 
 	}
-	$("#check_button").click(function(){
-		user_dup_execute();
-		event.preventDefault();
-	});
 </script>
 </head>
 <body>
-	<h1>ÀÌ°ÍÀº ÆË¾÷Ã¢ ÀÔ´Ï´Ù.</h1>
+	<h1>ì´ê²ƒì€ íŒì—…ì°½ ì…ë‹ˆë‹¤.</h1>
 	<table border="0" align="left">
 		<form id="check_id" name="login" method="post">
 			<tr>
-				<td>¾ÆÀÌµğ</td>
+				<td>ì•„ì´ë””</td>
 				<td><input type="text" id="user_id" name="user_id"
 					class="box01" size="19" maxlength="16" /></td>
-				<td width="70"><button id="check_button"  onclick = "user_dup_execute()" type="button">Áßº¹È®ÀÎ</button></td>
+				<td width="70"><button id="check_button"  onclick = "user_dup_execute()" type="button">ì¤‘ë³µí™•ì¸</button></td>
 				<td><div id="check_id"></div></td>
 			</tr>
 			<tr>
-				<td>ÆĞ½º¿öµå</td>
+				<td>íŒ¨ìŠ¤ì›Œë“œ</td>
 				<td><input type="password" id="user_pwd" name="user_pwd"
 					class="box01" size="19" maxlength="9"
 					onkeypress="if(self.event.keyCode==13) login_execute();"
@@ -113,7 +83,7 @@
 				<td width="70"></td>
 			</tr>
 			<tr>
-				<td>ÆĞ½º¿öµå È®ÀÎ</td>
+				<td>íŒ¨ìŠ¤ì›Œë“œ í™•ì¸</td>
 				<td><input type="password" id="user_pwd_right"
 					name="user_pwd_right" class="box01" size="19" maxlength="9"
 					onkeypress="if(self.event.keyCode==13) login_execute();"
@@ -122,7 +92,7 @@
 				<td width="46"></td>
 			</tr>
 			<tr>
-				<td>ÀÌ¸§</td>
+				<td>ì´ë¦„</td>
 				<td><input type="text" id="user_name" name="user_name"
 					class="box01" size="19" maxlength="16" /></td>
 				<td width="70"></td>
@@ -131,8 +101,8 @@
 			<tr>
 				<td></td>
 				<td></td>
-				<td height="4" colspan="3"><input type="button" value="µî·Ï"
-					onclick="user_insert();"></input></td>
+				<td height="4" colspan="3"><button type="button"
+					onclick="user_insert();" >ë“±ë¡</button></td>
 			</tr>
 		</form>
 	</table>
