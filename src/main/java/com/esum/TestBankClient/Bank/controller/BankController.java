@@ -85,8 +85,23 @@ public class BankController {
 	 * 존재햐는 아이디일 경우 메시지만 리턴한다
 	 * 그렇지 않다면 
 	 * */
-	@RequestMapping("/UserInsert.do")
-	public void UserInsert() throws Exception{
+	@RequestMapping("/userinsert.do")
+	public void UserInsert(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception{
+		String urlpath = url + "/userinsert";
+		PrintWriter out = null;
+		String userinsert = request.getParameter("param");
+		System.out.println(userinsert);
+		LoginService loginService = new LoginService();
+		
+		String result = loginService.userinsert(userinsert, urlpath);
+		
+		System.out.println(result);
+		
+		response.setHeader("return", result);
+		
+		out = response.getWriter();
+		
+		out.write(result);
 		//신규 유저 생성로직
 	}
 	@RequestMapping("/newUser.do")

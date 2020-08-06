@@ -52,5 +52,10 @@ public class LoginService {
 		
 		return result;
 	}
+	
+	public String userinsert(String jsondata, String url) {
+		
+		return null;
+	}
 
 }
