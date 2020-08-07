@@ -40,6 +40,22 @@ public class JsonHandler {
 		
 		String loginid = element.getAsJsonObject().get("loginid").toString();
 		String loginpwd = element.getAsJsonObject().get("loginpwd").toString();
+		String loginpwdconfirm = element.getAsJsonObject().get("loginpwdconfirm").toString();
+		
+		bnkuser.setBnk_user_id(loginid);
+		bnkuser.setBnk_user_pwd(loginpwd);
+		
+		return bnkuser;
+	}
+	
+	public BankUser parseAllBankUser(String jsonData) {
+		BankUser bnkuser = new BankUser();
+		
+		parser = new JsonParser();
+		element = parser.parse(jsonData);
+		
+		String loginid = element.getAsJsonObject().get("loginid").toString();
+		String loginpwd = element.getAsJsonObject().get("loginpwd").toString();
 		
 		bnkuser.setBnk_user_id(loginid);
 		bnkuser.setBnk_user_pwd(loginpwd);
@@ -53,11 +69,19 @@ public class JsonHandler {
 		parser = new JsonParser();
 		element = parser.parse(jsonData);
 		
-		String loginid = element.getAsJsonObject().get("loginid").toString();
-		String loginpwd = element.getAsJsonObject().get("loginpwd").toString();
+		String NewUserId = element.getAsJsonObject().get("userid").toString();
+		String NewUserPwd = element.getAsJsonObject().get("userpwd").toString();
+		String NewUserPwdCon = element.getAsJsonObject().get("userpwdconfirm").toString();
+		String NewUserName = element.getAsJsonObject().get("username").toString();
 		
-		bnkuser.setBnk_user_id(loginid);
-		bnkuser.setBnk_user_pwd(loginpwd);
+		if(!NewUserPwd.equals(NewUserPwdCon)) {
+			bnkuser.setBnk_user_id("false");
+		}else {
+			bnkuser.setBnk_user_id(NewUserId);
+			bnkuser.setBnk_user_pwd(NewUserPwd);
+			bnkuser.setBnk_user_name(NewUserName);
+		}
+		
 		
 		return bnkuser;
 	}

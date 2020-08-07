@@ -95,13 +95,15 @@ public class BankController {
 		
 		String result = loginService.userinsert(userinsert, urlpath);
 		
-		System.out.println(result);
-		
-		response.setHeader("return", result);
-		
-		out = response.getWriter();
-		
-		out.write(result);
+		if("false".equals(result)) {
+			response.setHeader("return", "false");
+			out = response.getWriter();
+			out.write("false");
+		}else {
+			response.setHeader("return", result);
+			out = response.getWriter();
+			out.write(result);
+		}
 		//신규 유저 생성로직
 	}
 	@RequestMapping("/newUser.do")

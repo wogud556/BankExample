@@ -72,7 +72,7 @@ public class HttpCall{
             writer.write(Reqsb.toString());
             writer.flush();
 
-			InputStreamReader in = new InputStreamReader((InputStream)conn.getContent(), "UTF-8");
+			InputStreamReader in = new InputStreamReader((InputStream)conn.getInputStream(), "UTF-8");
 			br = new BufferedReader(in);
             Ressb = new StringBuilder();
             String str;

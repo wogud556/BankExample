@@ -36,13 +36,9 @@
 			success : function(data22) {
 				alert(data22.toString().trim());
 				if(data22.toString().trim() === "true"){
-					alert("사용중인 아이디 입니다.");
-					//$("#check_id").text("사용중인아이디입니다.");
-					//$("#check_id").css("color","red");
+					
 				}else{
-					alert("사용 가능한 아이디 입니다.");
-					//$("#check_id").text("사용가능합니다.");
-					//$("#check_id").css("color","red");
+					
 				}
 				
 			},
@@ -50,7 +46,6 @@
 				alert("아이디 확인 중 오류가 발생하였습니다.");
 			}
 		});
-	}
 		
 		alert("틍록한다");
 	}
@@ -132,7 +127,7 @@
 			<tr>
 				<td></td>
 				<td></td>
-				<td height="4" colspan="3"><button id = "data_insert" type="button" onclick = "user_insert();" >등록</button></td>
+				<td height="4" colspan="3"><button id = "data_insert" type="button" onclick = "user_insert()" >등록</button></td>
 			</tr>
 		</form>
 	</table>
