@@ -81,7 +81,7 @@ public class HttpCall{
             }
 			
 			returnText = Ressb.toString();
-
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
@@ -92,8 +92,11 @@ public class HttpCall{
 				e.printStackTrace();
 			}
 		}
-
-		return returnText;
+		if("".equals(returnText.trim())) {
+			return "ok";
+		}else {
+			return returnText;
+		}
 	}
 	
 	

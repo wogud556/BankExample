@@ -35,24 +35,23 @@
 			contentType : "application/json",
 			success : function(data22) {
 				alert(data22.toString().trim());
-				if(data22.toString().trim() === "true"){
-					
+				if(data22.toString().trim() === "ok"){
+					alert("등록이 완료되었습니다.");
+					window.close();
 				}else{
-					
+					alert("비밀번호가 일치하지 않습니다. 다시 확인해주시기 바랍니다.");
 				}
 				
 			},
 			error : function() {
-				alert("아이디 확인 중 오류가 발생하였습니다.");
+				alert("아이디 등록중 오류가 발생했습니다. 관리자에게 확인 바랍니다.");
 			}
 		});
-		
-		alert("틍록한다");
+
 	}
 
 	function user_dup_execute() {
 		var userid = document.getElementById("user_id").value;
-
 		if (userid == "") {
 			alert("아이디가 입력되지 않았습니다.");
 		} else {
@@ -66,16 +65,18 @@
 					"param" : JSON.stringify(jsonobj)
 				},
 				contentType : "application/json",
-				success : function(data22) {
+				success : function(data22) { 
 					alert(data22.toString().trim());
 					if(data22.toString().trim() === "true"){
 						alert("사용중인 아이디 입니다.");
-						//$("#check_id").text("사용중인아이디입니다.");
-						//$("#check_id").css("color","red");
+						$('#check_id').text("사용중인 아이디입니다.");
+						alert("hello");
+						$('#check_id').css("color","red");
 					}else{
 						alert("사용 가능한 아이디 입니다.");
-						//$("#check_id").text("사용가능합니다.");
-						//$("#check_id").css("color","red");
+						$('#check_id').text("사용가능한 아이디입니다.");
+						alert("hello");
+						$('#check_id').css("color","red");
 					}
 					
 				},

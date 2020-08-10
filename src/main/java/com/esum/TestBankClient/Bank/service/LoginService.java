@@ -48,12 +48,11 @@ public class LoginService {
 			newUserdata.put("Bnk_user_id",bnkuser.getBnk_user_id());
 			newUserdata.put("Bnk_user_pwd", bnkuser.getBnk_user_pwd());
 			newUserdata.put("Bnk_user_name", bnkuser.getBnk_user_name());
-//			newUserdata.put("bnk_user_account_count", "0");// 값 넘길때 int로 돌려줘야함
-//			newUserdata.put("bnk_user_last_update", "날짜");
-//			newUserdata.put("bnk_user_level", "M"); //M이 보통사람 , S가 슈퍼유져(슈퍼유저는 여기 들어올일이 없다.) 
+
 			String result = httpCall.call(newUserdata);
 
-
+			System.out.println(result);
+			
 			return result;
 		}
 		
