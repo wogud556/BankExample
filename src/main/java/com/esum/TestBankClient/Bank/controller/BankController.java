@@ -15,23 +15,28 @@ import com.esum.TestBankClient.Bank.service.LoginService;
 @Controller
 public class BankController {
 
-	String url = "http://localhost:8089";
+	static final String url = "http://localhost:8089";
 	
+	/*
+	 * 최종 정리일 : 2020-09-04
+	 * 작성자 : 박재형
+	 * 로직명 : home메소드
+	 * 설명 : 초기화면으로 지정된 로그인 화면으로 로그인하는 프로그램
+	 * */
 	@RequestMapping("/")
 	public String home() throws Exception{
 		//로그인화면
 		return "login/login";
 	}
 	
-	@RequestMapping("/login.do")
-	public String login() throws Exception{
-		//로그인 데이터 날려서 맞는지 틀린지 확인할것
-		return "login/login";
-	}
-
-	
+	/*
+	 * 최종 정리일 : 2020-09-04
+	 * 작성자 : 박재형
+	 * 로직명 : LoginResult 메소드
+	 * 설명 : 로그인 결과를 보여주는 매소드
+	 * */
 	@RequestMapping("/loginResult.do")
-	public void result(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception{
+	public void loginResult(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception{
 		
 		PrintWriter out = null;
 		
@@ -53,12 +58,26 @@ public class BankController {
 		out.write(result);
 		
 	}
+	
+	
+	/*
+	 * 최종 정리일 : 2020-09-04
+	 * 작성자 : 박재형
+	 * 로직명 : mainView 메소드
+	 * 설명 : 로그인 성공 시 메인화면으로 화면전환하는 메소드
+	 * */
 	@RequestMapping("/main.do")
 	public String mainView(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception{
 		
 		return "main/main";
 	}
 	
+	/*
+	 * 최종 정리일 : 2020-09-04
+	 * 작성자 : 박재형
+	 * 로직명 : useridConfirm
+	 * 설명 : 사용자의 아이디가 이미 존재하는지 확인하는 메소드
+	 * */
 	@RequestMapping("/useridConfirm.do")
 	public void useridConfirm(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception{
 		String urlpath = url + "/findUserId";
@@ -80,13 +99,13 @@ public class BankController {
 	}
 	
 	/*
-	 * 신규유저 생성 로직
-	 * 먼저 해당 유저의 아이디가 존재하는지 확인
-	 * 존재햐는 아이디일 경우 메시지만 리턴한다
-	 * 그렇지 않다면 
+	 * 최종 정리일 : 2020-09-04
+	 * 작성자 : 박재형
+	 * 로직명 : userInsert
+	 * 설명 : 새로 생성한 정보를 입력하는 메소드
 	 * */
 	@RequestMapping("/userinsert.do")
-	public void UserInsert(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception{
+	public void userInsert(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception{
 		String urlpath = url + "/userinsert";
 		PrintWriter out = null;
 		String userinsert = request.getParameter("param");
